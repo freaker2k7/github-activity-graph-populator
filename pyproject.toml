@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "github-activity-graph-populator"
+version = "1.0.0"
+description = "A tool to populate GitHub activity graph the way you like or make it look super busy :)"
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.scripts]
+gagp = "github_activity_graph_populator.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "black", "ruff"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
