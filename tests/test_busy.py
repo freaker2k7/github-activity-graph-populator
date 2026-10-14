@@ -1,11 +1,15 @@
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timezone
 
 from github_activity_graph_populator.modes.busy import spread_actions
 
 
 def test_spread_actions():
-    from_date = datetime.combine(date.fromisoformat("2013-01-01"), time.min)
-    to_date = datetime.combine(date.fromisoformat("2013-04-01"), time.min)
+    from_date = datetime.combine(
+        date.fromisoformat("2013-01-01"), time.min, tzinfo=timezone.utc
+    )
+    to_date = datetime.combine(
+        date.fromisoformat("2013-04-01"), time.min, tzinfo=timezone.utc
+    )
 
     commits: int = ((to_date - from_date).days) * 10
     dates = spread_actions(from_date, to_date, 10, commits)
@@ -15,9 +19,14 @@ def test_spread_actions():
     assert dates[0].date() == from_date.date()
     assert dates[-1].date() <= to_date.date()
 
+
 def test_spread_actions_with_invalid_range():
-    from_date = datetime.combine(date.fromisoformat("2013-01-01"), time.min)
-    to_date = datetime.combine(date.fromisoformat("2012-01-01"), time.min)
+    from_date = datetime.combine(
+        date.fromisoformat("2013-01-01"), time.min, tzinfo=timezone.utc
+    )
+    to_date = datetime.combine(
+        date.fromisoformat("2012-01-01"), time.min, tzinfo=timezone.utc
+    )
 
     commits: int = 10
     try:
@@ -27,9 +36,14 @@ def test_spread_actions_with_invalid_range():
     else:
         assert False, "Expected ValueError was not raised"
 
+
 def test_spread_actions_with_total_actions_exceeding_limit():
-    from_date = datetime.combine(date.fromisoformat("2013-01-01"), time.min)
-    to_date = datetime.combine(date.fromisoformat("2013-01-10"), time.min)
+    from_date = datetime.combine(
+        date.fromisoformat("2013-01-01"), time.min, tzinfo=timezone.utc
+    )
+    to_date = datetime.combine(
+        date.fromisoformat("2013-01-10"), time.min, tzinfo=timezone.utc
+    )
 
     commits: int = 200
     try:
@@ -39,9 +53,14 @@ def test_spread_actions_with_total_actions_exceeding_limit():
     else:
         assert False, "Expected ValueError was not raised"
 
+
 def test_spread_actions_with_zero_count():
-    from_date = datetime.combine(date.fromisoformat("2013-01-01"), time.min)
-    to_date = datetime.combine(date.fromisoformat("2013-01-10"), time.min)
+    from_date = datetime.combine(
+        date.fromisoformat("2013-01-01"), time.min, tzinfo=timezone.utc
+    )
+    to_date = datetime.combine(
+        date.fromisoformat("2013-01-10"), time.min, tzinfo=timezone.utc
+    )
 
     commits: int = 0
     try:
@@ -51,9 +70,14 @@ def test_spread_actions_with_zero_count():
     else:
         assert False, "Expected ValueError was not raised"
 
+
 def test_spread_actions_with_zero_max_average_actions_in_a_day():
-    from_date = datetime.combine(date.fromisoformat("2013-01-01"), time.min)
-    to_date = datetime.combine(date.fromisoformat("2013-01-10"), time.min)
+    from_date = datetime.combine(
+        date.fromisoformat("2013-01-01"), time.min, tzinfo=timezone.utc
+    )
+    to_date = datetime.combine(
+        date.fromisoformat("2013-01-10"), time.min, tzinfo=timezone.utc
+    )
 
     commits: int = 10
     try:

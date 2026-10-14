@@ -16,7 +16,9 @@ def calc_commits(
 
     days = (to_date - from_date).days
     start_day = from_date.isoweekday() % 7
-    matrix = importlib.import_module(f"..matrix.{matrix_name}", package=__package__).matrix
+    matrix = importlib.import_module(
+        f"..matrix.{matrix_name.replace('-', '_')}", package=__package__
+    ).matrix
     flat_matrix = flatten_matrix(matrix)
 
     for i in range(days):

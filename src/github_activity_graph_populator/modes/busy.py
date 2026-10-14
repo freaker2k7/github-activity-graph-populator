@@ -73,7 +73,9 @@ def spread_actions(
         end = min(to_date, day_end)
 
         if count and start >= end:
-            raise ValueError(f"No valid time range for an active day: {day} [{start} - {end}]")
+            raise ValueError(
+                f"No valid time range for an active day: {day} [{start} - {end}]"
+            )
 
         for _ in range(count):
             offset = random.random() * (end - start).total_seconds()

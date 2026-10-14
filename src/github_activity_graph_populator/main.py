@@ -111,14 +111,18 @@ def main():
     tmp_import_file_path = tempfile.mkstemp(prefix="gpop-import-", dir="/tmp")[1]
 
     from_date = (
-        datetime.combine(date.fromisoformat(args.from_date), time.min, tzinfo=timezone.utc)
+        datetime.combine(
+            date.fromisoformat(args.from_date), time.min, tzinfo=timezone.utc
+        )
         if args.from_date
         else datetime.now(tz=timezone.utc).replace(
             hour=0, minute=0, second=0, microsecond=0
         )
     )
     to_date = (
-        datetime.combine(date.fromisoformat(args.to_date), time.min, tzinfo=timezone.utc)
+        datetime.combine(
+            date.fromisoformat(args.to_date), time.min, tzinfo=timezone.utc
+        )
         if args.to_date
         else datetime.now(tz=timezone.utc).replace(
             hour=0, minute=0, second=0, microsecond=0
