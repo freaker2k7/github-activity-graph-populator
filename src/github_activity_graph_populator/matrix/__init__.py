@@ -13,9 +13,10 @@ size = 7
 
 def flatten_matrix(matrix: str):
     arr = []
+    m = [list(row) for row in matrix.strip().split("\n")]
 
     for week in range(size):
         for day in range(size):
-            arr.append(conversions[matrix[week][day]])
+            arr.append(conversions[m[week][day]])
 
     return arr
