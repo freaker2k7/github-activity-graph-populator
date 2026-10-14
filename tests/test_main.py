@@ -14,6 +14,7 @@ def test_spread_actions_matrix(monkeypatch):
             "2013-01-10",
             "--matrix",
             "smile",
+            "--test",
         ],
     )
     main()
@@ -30,6 +31,7 @@ def test_spread_actions_busy(monkeypatch):
             "2013-01-10",
             "--mode",
             "busy",
+            "--test",
         ],
     )
     main()

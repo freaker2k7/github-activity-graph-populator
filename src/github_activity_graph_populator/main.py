@@ -101,6 +101,11 @@ def main():
         default=10,
         help="Average number of commits per day [only used for 'busy' mode]",
     )
+    parser.add_argument(
+        "--test",
+        action="store_true",
+        help="Run in test mode",
+    )
     args = parser.parse_args()
 
     blank_file = True
@@ -159,6 +164,11 @@ def main():
     logger.info(f"Temporary import file created at: {tmp_import_file_path}")
 
     open(input_folder_path + "/" + args.filename, "w").close()
+
+    if args.test:
+        logger.info("Running in test mode")
+        run(input_folder_path, "git config --local user.email 'you@example.com'")
+        run(input_folder_path, "git config --local user.name 'Your Name'")
 
     run(input_folder_path, "git init")
     run(input_folder_path, f"git add {args.filename}")
