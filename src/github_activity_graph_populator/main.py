@@ -92,7 +92,7 @@ def main():
         "--matrix",
         type=str,
         default="tree",
-        choices=["tree", "smile", "winking-smile"],
+        choices=["checkmark", "smile", "tree"],
         help="Matrix style for populating GitHub activity graph",
     )
     parser.add_argument(

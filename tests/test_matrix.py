@@ -4,7 +4,7 @@ import pytest
 from github_activity_graph_populator.modes.matrix import calc_commits
 
 
-@pytest.mark.parametrize("matrix", ["tree", "smile", "winking-smile"])
+@pytest.mark.parametrize("matrix", ["checkmark", "smile", "tree"])
 def test_calc_commits(matrix):
     from_date = datetime.combine(date.fromisoformat("2013-01-01"), time.min)
     to_date = datetime.combine(date.fromisoformat("2013-04-01"), time.min)

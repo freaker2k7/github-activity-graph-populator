@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        include:
+          - version: "3.9"
+          - version: "3.10"
+          - version: "3.11"
+          - version: "3.12"
+          - version: "3.13"
+          - version: "3.14"
+          - version: "3.15"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "${{ matrix.version }}"
+
+      - name: Install package and dev dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Run tests with coverage
+        run: |
+          python -m pytest \
+            --cov=github_activity_graph_populator \
+            --cov-report=term-missing \
+            --cov-fail-under=90
+
+      - name: Build package
+        run: python -m build
+
+      - name: Check twine configuration
+        run: python -m twine check dist/*
