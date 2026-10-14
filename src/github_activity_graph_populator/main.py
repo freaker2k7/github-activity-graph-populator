@@ -165,12 +165,13 @@ def main():
 
     open(input_folder_path + "/" + args.filename, "w").close()
 
+    run(input_folder_path, "git init")
+
     if args.test:
         logger.info("Running in test mode")
         run(input_folder_path, "git config --local user.email 'you@example.com'")
         run(input_folder_path, "git config --local user.name 'Your Name'")
 
-    run(input_folder_path, "git init")
     run(input_folder_path, f"git add {args.filename}")
 
     logger.info(f"Repository initialized in {input_folder_path}")
