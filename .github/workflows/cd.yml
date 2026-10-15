@@ -6,7 +6,8 @@ on:
       - 'release/v*'
 
 permissions:
-  contents: read
+  contents: write
+  actions: write
 
 jobs:
   build:
