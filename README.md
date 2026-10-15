@@ -1,6 +1,8 @@
 # GitHub Activity Graph Populator
 
-A tool to populate your GitHub activity graph the way you like — or make it look super busy!
+[![GitHub Build](https://github.com/freaker2k7/github-activity-graph-populator/actions/workflows/ci.yml/badge.svg)](https://github.com/freaker2k7/github-activity-graph-populator/actions)
+
+GAGP (GitHub Activity Graph Populator) is a tool to populate your GitHub activity graph the way you like — or make it look super busy!
 
 Zero dependencies, making it more secure and lightweight 🚀
 
@@ -97,4 +99,4 @@ Please see the [Security Policy](SECURITY.md) for information on reporting vulne
 
 ## License
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE.md) file for details.
+This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
