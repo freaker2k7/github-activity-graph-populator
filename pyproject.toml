@@ -15,7 +15,8 @@ authors = [
 [project.urls]
 Homepage = "https://github.com/freaker2k7/github-activity-graph-populator"
 Repository = "https://github.com/freaker2k7/github-activity-graph-populator"
-Issues = "https://github.com/freaker2k7/github-activity-graph-populator/issues"
+Documentation = "https://github.com/freaker2k7/github-activity-graph-populator/blob/master/README.md"
+"Bug Tracker" = "https://github.com/freaker2k7/github-activity-graph-populator/issues"
 
 [project.scripts]
 gagp = "github_activity_graph_populator.main:main"

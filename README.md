@@ -41,7 +41,7 @@ pip install github-activity-graph-populator
 **Then**, after you install the package, you can use the command line.
 See the help message for available commands:
 
-```bash
+```text
 $ gagp --help
 
 usage: main.py [-h] [--repo REPO] [--force-push] [--filename FILENAME] [--folder FOLDER] [--from-date FROM_DATE] [--to-date TO_DATE] [--mode {matrix,busy}] [--matrix {tree,checkmark,wave,smile,flower}]

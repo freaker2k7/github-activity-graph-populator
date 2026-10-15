@@ -31,7 +31,6 @@ jobs:
 
       - name: Install build tools & dev dependencies
         run: |
-          python -m pip install --upgrade pip
           python -m pip install build twine
           python -m pip install -e ".[dev]"
 
