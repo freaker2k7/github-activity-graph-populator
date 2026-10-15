@@ -2,8 +2,6 @@ import logging
 import tempfile
 from datetime import date, datetime, time, timezone
 from os import linesep
-from random import choice
-from string import ascii_uppercase
 
 from github_activity_graph_populator.lib.args import get_args
 from github_activity_graph_populator.lib.consts import package_name
@@ -21,11 +19,10 @@ def main():
     args = get_args()
 
     blank_file = True
-    random_string = "".join(choice(ascii_uppercase) for i in range(4096))
-    input_folder_path = tempfile.mkdtemp(prefix="gpop-", dir=args.folder or "/tmp")
-    output_folder_path = tempfile.mkdtemp(prefix="gpop-", dir=args.folder or "/tmp")
-    tmp_export_file_path = tempfile.mkstemp(prefix="gpop-export-", dir="/tmp")[1]
-    tmp_import_file_path = tempfile.mkstemp(prefix="gpop-import-", dir="/tmp")[1]
+    input_folder_path = tempfile.mkdtemp(prefix="gagp-", dir=args.folder or "/tmp")
+    output_folder_path = tempfile.mkdtemp(prefix="gagp-", dir=args.folder or "/tmp")
+    tmp_export_file_path = tempfile.mkstemp(prefix="gagp-export-", dir="/tmp")[1]
+    tmp_import_file_path = tempfile.mkstemp(prefix="gagp-import-", dir="/tmp")[1]
 
     from_date = (
         datetime.combine(
@@ -84,7 +81,7 @@ def main():
     for i in range(commits):
         with open(input_folder_path + "/" + args.filename, "w") as f:
             if blank_file:
-                f.write(random_string)
+                f.write(".")
             else:
                 f.write("")
         blank_file = not blank_file

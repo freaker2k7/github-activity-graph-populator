@@ -6,15 +6,31 @@ GAGP (GitHub Activity Graph Populator) is a tool to populate your GitHub activit
 
 Zero dependencies, making it more secure and lightweight 🚀
 
+## Available Patterns
+
+- Tree
+- Checkmark
+- Wave
+- Smile
+- Flower
+
+Or make it look super busy using the busy mode.
+
 ## Demo
 
 You can see a live demo on my own GitHub profile [here](https://github.com/freaker2k7).
 
-![Before](https://i.imgur.com/K5AkkUp.png)
-<sub>Before it looked like this...</sub>
+![Before](https://i.imgur.com/K5AkkUp.png)<br>
+<sub>2012: Before it looked like this...</sub>
 
-![After](https://i.imgur.com/DmmQgaI.png)
-<sub>Now, it looked like this! This is the tree pattern and yeah, my design skills definitely need improvement 😅</sub>
+![After](https://i.imgur.com/e0fj6BL.png)<br>
+<sub>2012: Now, it looked like this! This is the flower pattern.</sub>
+
+![Before](https://i.imgur.com/AhmJODc.png)<br>
+<sub>2013: Before it was like this...</sub>
+
+![After](https://i.imgur.com/DmmQgaI.png)<br>
+<sub>2013: Now, it's like this! This is the tree pattern and yeah, my design skills definitely need improvement but it's really hard to draw on a 7 pixel grid 😅</sub>
 
 *Note: I have a huge number of contributions on my GitHub profile, the images are from the years 2012 and 2013, back then my activity on GitHub was much lower.*
 
@@ -87,6 +103,32 @@ gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo your-github-username/y
 ```
 
 *NOTE: Though I don't recommend it as the re-caching of the GitHub activity graph can take some time. I suggest using a new repo or deleting and recreating the existing one as this is kind of a "dummy" repository that we just need to update its history.*
+
+#### Output
+
+When running the cli command, you will see output similar to the following:
+
+```bash
+$ gagp --from-date 2012-01-01 --to-date 2012-12-30 --matrix flower --repo freaker2k7/2012-flowers
+
+[INFO] 2026-10-15 14:07:18,795: github-activity-graph-populator >> Temporary input folder created at: /tmp/gagp-s4y5ok57
+[INFO] 2026-10-15 14:07:18,795: github-activity-graph-populator >> Temporary output folder created at: /tmp/gagp-xg2qgrq7
+[INFO] 2026-10-15 14:07:18,795: github-activity-graph-populator >> Temporary export file created at: /tmp/gagp-export-kms17yuf
+[INFO] 2026-10-15 14:07:18,795: github-activity-graph-populator >> Temporary import file created at: /tmp/gagp-import-7xgdpp9z
+[INFO] 2026-10-15 14:07:18,821: github-activity-graph-populator >> Repository initialized in /tmp/gagp-s4y5ok57
+[INFO] 2026-10-15 14:07:36,785: github-activity-graph-populator >> Exported git data to: /tmp/gagp-export-kms17yuf
+[INFO] 2026-10-15 14:07:36,788: github-activity-graph-populator >> Finished reading exported git data.
+[INFO] 2026-10-15 14:07:39,615: github-activity-graph-populator >> Repository imported in /tmp/gagp-xg2qgrq7 with 903 commits
+gagp --from-date 2012-01-01 --to-date 2012-12-30 --matrix flower --repo freaker2k7/2012-flowers  7.00s user 8.68s system 87% cpu 18.012 total
+```
+
+As the temporary folders and files are created in the `/tmp` directory, they will be automatically cleaned up by the system.
+
+After it finishes, you should see the updated GitHub activity graph reflecting the changes made by the tool in a few moments.
+
+**NOTICE: It took less than 20 seconds to complete a year on my MacBook Pro M2 Max.**
+
+*NOTE: This is the actual output I saw when I "planted" the flowers :)*
 
 ## Contributing
 

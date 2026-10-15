@@ -115,4 +115,6 @@ def test_main_runs_as_script():
     )
 
     assert result.returncode == 0, result.stderr
-    assert "Repository imported" in result.stdout or "Repository imported" in result.stderr
+    assert (
+        "Repository imported" in result.stdout or "Repository imported" in result.stderr
+    )
