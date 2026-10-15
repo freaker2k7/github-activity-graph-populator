@@ -90,16 +90,16 @@ options:
 
 ```bash
 # Colorful tree pattern
-gagp --matrix tree --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name
+gagp --matrix tree --from 2013-01-01 --to 2013-04-01 --repo username/repo-name
 
 # Or make it look super busy
-gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name
+gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo username/repo-name
 ```
 
 (Optionally) You can force push the changes if the repository is not clean:
 
 ```bash
-gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name --force-push
+gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo username/repo-name --force-push
 ```
 
 *NOTE: Though I don't recommend it as the re-caching of the GitHub activity graph can take some time. I suggest using a new repo or deleting and recreating the existing one as this is kind of a "dummy" repository that we just need to update its history.*
