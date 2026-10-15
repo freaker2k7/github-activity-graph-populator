@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import subprocess
+from pathlib import Path
 
 from .consts import package_name
 
@@ -13,7 +14,7 @@ def run(
     command: str,
     stdin_file: str | None = None,
     allowed_status_codes: list[int] | None = None,
-):
+) -> str:
     logger.debug(f"Running command: `{command}` in {cwd}")
 
     with open(stdin_file, "r") if stdin_file else open("/dev/null") as input_file:
@@ -36,3 +37,18 @@ def run(
             )
 
         return result.stdout
+
+
+def cleanup(paths: list[str | Path]) -> None:
+    _paths = [Path(path) for path in paths]
+    for path in _paths:
+        if path.exists():
+            if path.is_dir():
+                for sub_path in path.iterdir():
+                    if sub_path.is_file():
+                        sub_path.unlink()
+                    else:
+                        cleanup([sub_path])
+                path.rmdir()
+            else:
+                path.unlink()

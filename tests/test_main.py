@@ -33,6 +33,29 @@ def test_spread_actions_busy(monkeypatch, from_date, to_date):
             str(to_date.date()),
             "--mode",
             "busy",
+            "--cleanup",
+            "--test",
+        ],
+    )
+
+    main()
+
+
+def test_spread_actions_custom(monkeypatch, from_date, to_date):
+    monkeypatch.setattr(
+        "sys.argv",
+        [
+            "gagp",
+            "--from-date",
+            str(from_date.date()),
+            "--to-date",
+            str(to_date.date()),
+            "--mode",
+            "matrix",
+            "--matrix",
+            "custom",
+            "--custom-matrix",
+            "tests/assets/custom_matrix_flower.txt",
             "--test",
         ],
     )

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import importlib
 import logging
 from datetime import datetime, timedelta
@@ -9,16 +11,25 @@ logger = logging.getLogger(f"{package_name}-matrix")
 
 
 def calc_commits(
-    matrix_name, from_date: datetime, to_date: datetime
+    matrix_name,
+    from_date: datetime,
+    to_date: datetime,
+    custom_matrix: str | None = None,
 ) -> tuple[int, list[datetime]]:
     count = 0
     dates = []
 
     days = (to_date - from_date).days
     start_day = from_date.isoweekday() % 7
-    matrix = importlib.import_module(
-        f"..templates.{matrix_name.replace('-', '_')}", package=__package__
-    ).matrix
+
+    if matrix_name == "custom" and custom_matrix:
+        with open(custom_matrix, "r") as f:
+            matrix = f.read()
+    else:
+        matrix = importlib.import_module(
+            f"..templates.{matrix_name.replace('-', '_')}", package=__package__
+        ).matrix
+
     flat_matrix = flatten_matrix(matrix)
 
     for i in range(days):

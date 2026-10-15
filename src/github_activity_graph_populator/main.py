@@ -5,7 +5,7 @@ from os import linesep
 
 from github_activity_graph_populator.lib.args import get_args
 from github_activity_graph_populator.lib.consts import package_name
-from github_activity_graph_populator.lib.utils import run
+from github_activity_graph_populator.lib.utils import cleanup, run
 from github_activity_graph_populator.modes.busy import spread_actions
 from github_activity_graph_populator.modes.matrix import calc_commits
 
@@ -49,7 +49,9 @@ def main():
     to_date = max(to_date, from_date)
 
     if args.mode == "matrix":
-        commits, dates = calc_commits(args.matrix, from_date, to_date)
+        commits, dates = calc_commits(
+            args.matrix, from_date, to_date, args.custom_matrix
+        )
     else:  # busy mode
         commits: int = ((to_date - from_date).days) * args.max_intensity
 
@@ -140,6 +142,16 @@ def main():
             run(output_folder_path, "git push -u origin master")
 
     logger.info(f"Repository imported in {output_folder_path} with {commits} commits")
+
+    if args.cleanup:
+        cleanup(
+            [
+                input_folder_path,
+                output_folder_path,
+                tmp_export_file_path,
+                tmp_import_file_path,
+            ]
+        )
 
 
 if __name__ == "__main__":

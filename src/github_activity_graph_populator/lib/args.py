@@ -7,10 +7,14 @@ choices = [
     for p in (this_file.parent.parent / "templates").glob("*.py")
     if p.is_file() and not p.stem.startswith("_")
 ]
+choices.append("custom")
 
 
 def get_args():
-    parser = argparse.ArgumentParser(description="Populate GitHub activity graph")
+    parser = argparse.ArgumentParser(
+        description="Populate GitHub activity graph",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
     parser.add_argument(
         "--repo",
         default=None,
@@ -58,10 +62,21 @@ def get_args():
         help="Matrix style for populating GitHub activity graph",
     )
     parser.add_argument(
+        "--custom-matrix",
+        type=str,
+        default=None,
+        help="Path to custom tile style for populating GitHub activity graph. There must be 7 rows and at least 1 column in the matrix and it should be a plain text file. The values in the matrix represent the color 0-4 from white to dark green",
+    )
+    parser.add_argument(
         "--max-intensity",
         type=int,
         default=10,
         help="Average number of commits per day [only used for 'busy' mode]",
+    )
+    parser.add_argument(
+        "--cleanup",
+        action="store_true",
+        help="Run cleanup after populating GitHub activity graph",
     )
     parser.add_argument(
         "--test",

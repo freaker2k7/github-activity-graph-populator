@@ -11,6 +11,15 @@ Before contributing, make sure you have the following installed:
 - Python 3.9 or higher
 - Git (for version control)
 
+## Clone
+
+To contribute to the project, you need to clone the repository on GitHub and get it on your local machine:
+
+```bash
+git clone https://github.com/your-username/github-activity-graph-populator.git
+cd github-activity-graph-populator
+```
+
 ## Virtual Environment
 
 It's recommended to create a virtual environment to manage dependencies for the project.
@@ -84,7 +93,7 @@ You can run the tests using pytest:
 python -m pytest --cov=github_activity_graph_populator --cov-report=term-missing --cov-fail-under=99
 ```
 
-*NOTE: The coverage threshold is set to 99.49%, so the tests will fail if the coverage is below this value; if anyone can make it 100%, that would be even better!*
+*NOTE: The coverage threshold is set to 99.53%, so the tests will fail if the coverage is below this value; if anyone can make it 100%, that would be great! Currently the only line that is not covered by the coverage, even though we test it in the last test in `test_main.py::test_main_runs_as_script`, is the last line in `main.py`.*
 
 ## Linting & Formatting
 
@@ -101,6 +110,14 @@ You can run the formatter using:
 ```bash
 python -m black src tests
 ```
+
+## Commit Messages
+
+Please use clear and descriptive commit messages that explain the purpose of the changes you are making.
+Attach relevant issue numbers or related information in the commit message if applicable.
+Screenshot are most welcome to illustrate the changes made.
+
+And thank you again for contributing to the project!
 
 ## TODO (for now)
 

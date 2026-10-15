@@ -4,7 +4,7 @@
 
 GAGP (GitHub Activity Graph Populator) is a tool to populate your GitHub activity graph the way you like — or make it look super busy!
 
-Zero dependencies, making it more secure and lightweight 🚀
+**Zero** dependencies, **99.53%** test coverage and **PyPI MFA** enabled making it more secure and lightweight 🚀
 
 ## Available Patterns
 
@@ -13,6 +13,7 @@ Zero dependencies, making it more secure and lightweight 🚀
 - Wave
 - Smile
 - Flower
+- **Custom** (see details below)
 
 Or make it look super busy using the busy mode.
 
@@ -60,26 +61,30 @@ See the help message for available commands:
 ```text
 $ gagp --help
 
-usage: main.py [-h] [--repo REPO] [--force-push] [--filename FILENAME] [--folder FOLDER] [--from-date FROM_DATE] [--to-date TO_DATE] [--mode {matrix,busy}] [--matrix {tree,checkmark,wave,smile,flower}]
-               [--max-intensity MAX_INTENSITY] [--test]
+usage: main.py [-h] [--repo REPO] [--force-push] [--filename FILENAME] [--folder FOLDER] [--from-date FROM_DATE] [--to-date TO_DATE] [--mode {matrix,busy}] [--matrix {tree,checkmark,wave,smile,flower,custom}]
+               [--custom-matrix CUSTOM_MATRIX] [--max-intensity MAX_INTENSITY] [--cleanup] [--test]
 
 Populate GitHub activity graph
 
 options:
   -h, --help            show this help message and exit
-  --repo REPO           Name of the repository to populate in the format of <github_username>/<repository_name>
-  --force-push          Force push to the remote repository
-  --filename FILENAME   Name of the file to create and commit
-  --folder FOLDER       Folder to create temporary files in
+  --repo REPO           Name of the repository to populate in the format of <github_username>/<repository_name> (default: None)
+  --force-push          Force push to the remote repository (default: False)
+  --filename FILENAME   Name of the file to create and commit (default: README.md)
+  --folder FOLDER       Folder to create temporary files in (default: None)
   --from-date FROM_DATE
-                        Start date for populating GitHub activity graph
-  --to-date TO_DATE     End date for populating GitHub activity graph
-  --mode {matrix,busy}  Mode for populating GitHub activity graph
-  --matrix {tree,checkmark,wave,smile,flower}
-                        Matrix style for populating GitHub activity graph
+                        Start date for populating GitHub activity graph (default: None)
+  --to-date TO_DATE     End date for populating GitHub activity graph (default: None)
+  --mode {matrix,busy}  Mode for populating GitHub activity graph (default: matrix)
+  --matrix {tree,checkmark,wave,smile,flower,custom}
+                        Matrix style for populating GitHub activity graph (default: tree)
+  --custom-matrix CUSTOM_MATRIX
+                        Path to custom tile style for populating GitHub activity graph. There must be 7 rows and at least 1 column in the matrix and it should be a plain text file. The values in the matrix represent the color 0-4 from
+                        white to dark green (default: None)
   --max-intensity MAX_INTENSITY
-                        Average number of commits per day [only used for 'busy' mode]
-  --test                Run in test mode
+                        Average number of commits per day [only used for 'busy' mode] (default: 10)
+  --cleanup             Run cleanup after populating GitHub activity graph (default: False)
+  --test                Run in test mode (default: False)
 ```
 
 *Note: The date format for the `--from-date` and `--to-date` options is `YYYY-MM-DD`.*
@@ -90,16 +95,39 @@ options:
 
 ```bash
 # Colorful tree pattern
-gagp --matrix tree --from 2013-01-01 --to 2013-04-01 --repo username/repo-name
+gagp --matrix tree --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name
 
 # Or make it look super busy
-gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo username/repo-name
+gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name
 ```
+
+You can create your own custom matrix by using the `--matrix custom` and `--custom-matrix` options.
+
+```bash
+gagp --matrix custom --custom-matrix path/to/your/custom_matrix.txt --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name
+```
+
+when your `custom_matrix.txt` looks something like this:
+
+```
+0123411
+1111111
+1111111
+1111111
+1112211
+1133311
+1111111
+```
+
+There must be 7 rows and at least 1 column in the matrix and it should be a plain text file.
+The values in the matrix represent the color 0-4 from white to dark green.
+
+You can generate your own custom matrix using any tile builder (see the [contribution guide](CONTRIBUTING.md) for more information).
 
 (Optionally) You can force push the changes if the repository is not clean:
 
 ```bash
-gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo username/repo-name --force-push
+gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name --force-push
 ```
 
 *NOTE: Though I don't recommend it as the re-caching of the GitHub activity graph can take some time. I suggest using a new repo or deleting and recreating the existing one as this is kind of a "dummy" repository that we just need to update its history.*

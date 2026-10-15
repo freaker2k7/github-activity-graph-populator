@@ -14,6 +14,16 @@ templates = list(
 good_choices = [p.stem for p in templates if p.is_file() and not p.stem.startswith("_")]
 bad_choices = [p.stem for p in templates if p.is_file() and p.stem.startswith("_b")]
 
+templates = list((this_file.parent / "assets").glob("*.txt"))
+custom_good_choices = [
+    str(p.resolve())
+    for p in templates
+    if p.is_file() and not p.stem.startswith("broken")
+]
+custom_bad_choices = [
+    str(p.resolve()) for p in templates if p.is_file() and p.stem.startswith("broken")
+]
+
 
 def test_choices():
     assert good_choices, "No good choices found"
@@ -34,6 +44,22 @@ def test_calc_commits_valid_matrices(matrix, from_date, to_date):
 def test_calc_commits_invalid_matrices(matrix, from_date, to_date):
     with pytest.raises(ValueError):
         calc_commits(matrix, from_date, to_date)
+
+
+@pytest.mark.parametrize("matrix_path", custom_good_choices)
+def test_calc_commits_valid_matrices_custom(matrix_path, from_date, to_date):
+    commits, dates = calc_commits("custom", from_date, to_date, matrix_path)
+
+    assert commits > 0
+    assert len(dates) == commits
+    assert dates[0].date() >= from_date.date()
+    assert dates[-1].date() <= to_date.date()
+
+
+@pytest.mark.parametrize("matrix_path", custom_bad_choices)
+def test_calc_commits_invalid_custom_matrices(matrix_path, from_date, to_date):
+    with pytest.raises(ValueError):
+        calc_commits("custom", from_date, to_date, matrix_path)
 
 
 def test_calc_commits_range(from_date):
