@@ -122,7 +122,7 @@ when your `custom_matrix.txt` looks something like this:
 There must be 7 rows and at least 1 column in the matrix and it should be a plain text file.
 The values in the matrix represent the color 0-4 from white to dark green.
 
-You can generate your own custom matrix using any tile builder (see the [contribution guide](CONTRIBUTING.md) for more information).
+You can generate your own custom matrix using any tile builder (see the [contribution guide](https://github.com/freaker2k7/github-activity-graph-populator?tab=contributing-ov-file) for more information).
 
 (Optionally) You can force push the changes if the repository is not clean:
 
@@ -160,13 +160,13 @@ After it finishes, you should see the updated GitHub activity graph reflecting t
 
 ## Contributing
 
-If you want to contribute to the project, please refer to the [Contributing Guide](CONTRIBUTING.md) for detailed instructions on setting up the development environment, adding new modes or tiles, running tests and maintaining code quality.
+If you want to contribute to the project, please refer to the [Contributing Guide](https://github.com/freaker2k7/github-activity-graph-populator?tab=contributing-ov-file) for detailed instructions on setting up the development environment, adding new modes or tiles, running tests and maintaining code quality.
 
 ## Security
 
-Please see the [Security Policy](SECURITY.md) for information on reporting vulnerabilities and security-related concerns.
+Please see the [Security Policy](https://github.com/freaker2k7/github-activity-graph-populator?tab=security-ov-file) for information on reporting vulnerabilities and security-related concerns.
 
 
 ## License
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0. See the [LICENSE](https://github.com/freaker2k7/github-activity-graph-populator?tab=Apache-2.0-1-ov-file) file for details.
