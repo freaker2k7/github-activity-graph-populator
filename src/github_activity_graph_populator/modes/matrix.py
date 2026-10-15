@@ -2,10 +2,10 @@ import importlib
 import logging
 from datetime import datetime, timedelta
 
-from ..matrix import flatten_matrix
+from ..lib.consts import package_name
+from ..templates import flatten_matrix
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("github-activity-graph-populator-matrix")
+logger = logging.getLogger(f"{package_name}-matrix")
 
 
 def calc_commits(
@@ -17,7 +17,7 @@ def calc_commits(
     days = (to_date - from_date).days
     start_day = from_date.isoweekday() % 7
     matrix = importlib.import_module(
-        f"..matrix.{matrix_name.replace('-', '_')}", package=__package__
+        f"..templates.{matrix_name.replace('-', '_')}", package=__package__
     ).matrix
     flat_matrix = flatten_matrix(matrix)
 

@@ -39,12 +39,16 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev]"
 
+      - name: Check lint
+        run: |
+          ruff check src tests
+
       - name: Run tests with coverage
         run: |
           python -m pytest \
             --cov=github_activity_graph_populator \
             --cov-report=term-missing \
-            --cov-fail-under=90
+            --cov-fail-under=99
 
       - name: Build package
         run: python -m build

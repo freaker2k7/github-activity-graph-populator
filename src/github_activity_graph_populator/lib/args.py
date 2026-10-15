@@ -1,0 +1,72 @@
+import argparse
+from pathlib import Path
+
+this_file = Path(__file__).resolve()
+choices = [
+    p.stem
+    for p in (this_file.parent.parent / "templates").glob("*.py")
+    if p.is_file() and not p.stem.startswith("_")
+]
+
+
+def get_args():
+    parser = argparse.ArgumentParser(description="Populate GitHub activity graph")
+    parser.add_argument(
+        "--repo",
+        default=None,
+        type=str,
+        help="Name of the repository to populate in the format of <github_username>/<repository_name>",
+    )
+    parser.add_argument(
+        "--force-push",
+        action="store_true",
+        help="Force push to the remote repository",
+    )
+    parser.add_argument(
+        "--filename",
+        type=str,
+        default="README.md",
+        help="Name of the file to create and commit",
+    )
+    parser.add_argument(
+        "--folder", type=str, default=None, help="Folder to create temporary files in"
+    )
+    parser.add_argument(
+        "--from-date",
+        type=str,
+        default=None,
+        help="Start date for populating GitHub activity graph",
+    )
+    parser.add_argument(
+        "--to-date",
+        type=str,
+        default=None,
+        help="End date for populating GitHub activity graph",
+    )
+    parser.add_argument(
+        "--mode",
+        type=str,
+        default="matrix",
+        choices=["matrix", "busy"],
+        help="Mode for populating GitHub activity graph",
+    )
+    parser.add_argument(
+        "--matrix",
+        type=str,
+        default="tree",
+        choices=choices,
+        help="Matrix style for populating GitHub activity graph",
+    )
+    parser.add_argument(
+        "--max-intensity",
+        type=int,
+        default=10,
+        help="Average number of commits per day [only used for 'busy' mode]",
+    )
+    parser.add_argument(
+        "--test",
+        action="store_true",
+        help="Run in test mode",
+    )
+
+    return parser.parse_args()

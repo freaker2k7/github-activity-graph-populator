@@ -1,112 +1,24 @@
-from __future__ import annotations
-
-import argparse
 import logging
-import subprocess
 import tempfile
 from datetime import date, datetime, time, timezone
+from os import linesep
 from random import choice
 from string import ascii_uppercase
 
-from .modes.busy import spread_actions
-from .modes.matrix import calc_commits
+from github_activity_graph_populator.lib.args import get_args
+from github_activity_graph_populator.lib.consts import package_name
+from github_activity_graph_populator.lib.utils import run
+from github_activity_graph_populator.modes.busy import spread_actions
+from github_activity_graph_populator.modes.matrix import calc_commits
 
 logging.basicConfig(
     level=logging.INFO, format="[%(levelname)s] %(asctime)s: %(name)s >> %(message)s"
 )
-logger = logging.getLogger("github-activity-graph-populator")
-
-
-def run(
-    cwd: str,
-    command: str,
-    stdin_file: str | None = None,
-    allowed_status_codes: list[int] | None = None,
-):
-    logger.debug(f"Running command: `{command}` in {cwd}")
-
-    with open(stdin_file, "r") if stdin_file else open("/dev/null") as input_file:
-        result = subprocess.run(
-            command,
-            capture_output=True,
-            cwd=cwd,
-            shell=True,
-            text=True,
-            stdin=input_file,
-            check=False,
-        )
-
-        if allowed_status_codes is None:
-            allowed_status_codes = [0]
-
-        if result.returncode not in allowed_status_codes:
-            raise RuntimeError(
-                f"Command failed with return code {result.returncode}: {result.stderr}"
-            )
-
-        return result.stdout
+logger = logging.getLogger(package_name)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Populate GitHub activity graph")
-    parser.add_argument(
-        "--repo",
-        default=None,
-        type=str,
-        help="Name of the repository to populate in the format of <github_username>/<repository_name>",
-    )
-    parser.add_argument(
-        "--force-push",
-        action="store_true",
-        help="Force push to the remote repository",
-    )
-    parser.add_argument(
-        "--filename",
-        type=str,
-        default="README.md",
-        help="Name of the file to create and commit",
-    )
-    parser.add_argument(
-        "--folder", type=str, default=None, help="Folder to create temporary files in"
-    )
-    parser.add_argument(
-        "--from-date",
-        type=str,
-        default=None,
-        help="Start date for populating GitHub activity graph",
-    )
-    parser.add_argument(
-        "--to-date",
-        type=str,
-        default=None,
-        help="End date for populating GitHub activity graph",
-    )
-    parser.add_argument(
-        "--mode",
-        type=str,
-        default="matrix",
-        choices=["matrix", "busy"],
-        help="Mode for populating GitHub activity graph",
-    )
-    parser.add_argument(
-        "--matrix",
-        type=str,
-        default="tree",
-        choices=["checkmark", "smile", "tree"],
-        help="Matrix style for populating GitHub activity graph",
-    )
-    parser.add_argument(
-        "--max-intensity",
-        type=int,
-        default=10,
-        help="Average number of commits per day [only used for 'busy' mode]",
-    )
-    parser.add_argument(
-        "--test",
-        action="store_true",
-        help="Run in test mode",
-    )
-    args = parser.parse_args()
+    args = get_args()
 
     blank_file = True
     random_string = "".join(choice(ascii_uppercase) for i in range(4096))
@@ -151,13 +63,6 @@ def main():
             total_actions=commits,
         )
 
-    if commits != len(dates):
-        raise ValueError(
-            "Mismatch between number of commits and verification count",
-            commits,
-            len(dates),
-        )
-
     logger.info(f"Temporary input folder created at: {input_folder_path}")
     logger.info(f"Temporary output folder created at: {output_folder_path}")
     logger.info(f"Temporary export file created at: {tmp_export_file_path}")
@@ -187,7 +92,7 @@ def main():
         run(input_folder_path, f"git commit -am 'Fix #{i+1}'")
 
         print(
-            f"INFO:github-activity-graph-populator:Committed Fix #{i+1}\r",
+            f"[INFO] {datetime.now(tz=timezone.utc).isoformat()}: {package_name} >> Committed Fix #{i+1}\r",
             flush=True,
             end="",
         )
@@ -208,7 +113,7 @@ def main():
                     timestamp = dates.pop(0)
                 parts = line.strip().split()
                 parts[-2] = str(int(timestamp.timestamp()))
-                line = " ".join(parts) + "\n"
+                line = " ".join(parts) + linesep
             logger.debug(">> %s", line)
             output.write(line)
 

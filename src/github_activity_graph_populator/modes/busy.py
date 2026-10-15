@@ -3,8 +3,9 @@ import math
 import random
 from datetime import datetime, timedelta, timezone
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("github-activity-graph-populator-busy")
+from ..lib.consts import package_name
+
+logger = logging.getLogger(f"{package_name}-busy")
 
 
 def spread_actions(
@@ -37,10 +38,6 @@ def spread_actions(
         raise ValueError("Total actions exceed the average daily limit")
 
     max_actions_per_active_day = math.ceil(total_actions / active_days_count)
-
-    if total_actions > days * max_average_actions_in_a_day:
-        raise ValueError("Total actions exceed the average daily limit")
-
     all_days = [first_day + timedelta(days=i) for i in range(days)]
     zero_days = set(random.sample(all_days, zero_days_count))
     active_days = [day for day in all_days if day not in zero_days]
@@ -72,10 +69,10 @@ def spread_actions(
         start = max(from_date, day_start)
         end = min(to_date, day_end)
 
-        if count and start >= end:
-            raise ValueError(
-                f"No valid time range for an active day: {day} [{start} - {end}]"
-            )
+        # if count and start >= end:
+        #     raise ValueError(
+        #         f"No valid time range for an active day: {day} [{start} - {end}]"
+        #     )
 
         for _ in range(count):
             offset = random.random() * (end - start).total_seconds()
