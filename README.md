@@ -90,7 +90,7 @@ gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo your-github-username/y
 
 ## Contributing
 
-If you want to contribute to the project, please refer to the [Contributing Guide](CONTRIBUTE.md) for detailed instructions on setting up the development environment, adding new modes or tiles, running tests and maintaining code quality.
+If you want to contribute to the project, please refer to the [Contributing Guide](CONTRIBUTING.md) for detailed instructions on setting up the development environment, adding new modes or tiles, running tests and maintaining code quality.
 
 ## Security
 
