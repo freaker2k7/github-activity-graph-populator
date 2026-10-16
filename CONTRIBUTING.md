@@ -81,7 +81,7 @@ Basically, when `--repo` is not specified, the tool will perform a dry run.
 This is helpful sometime for debugging to leave the temporary folder:
 
 ```bash
-gagp --mode busy --from 2013-01-01 --to 2013-04-01
+gagp --mode busy --from-date 2013-01-01 --to-date 2013-04-01
 ```
 
 ## Running tests

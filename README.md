@@ -83,6 +83,7 @@ options:
                         white to dark green (default: None)
   --max-intensity MAX_INTENSITY
                         Average number of commits per day [only used for 'busy' mode] (default: 10)
+  --agent [PATH]        Install SKILLS.md into PATH when this argument is specified (default: current directory) (default: None)
   --cleanup             Run cleanup after populating GitHub activity graph (default: False)
   --test                Run in test mode (default: False)
 ```
@@ -93,18 +94,28 @@ options:
 
 ### Examples
 
+Install the skill and use the tool from your favorite agent or harness by specifying the `--agent` option:
+
+```bash
+gagp --agent /path/to/your/agent/gagp
+```
+
+This will install the skill into the specified agent or harness directory and allow you to automate interactions with the GitHub Activity Graph Populator through your main application.
+
+Alternatively, run it manually:
+
 ```bash
 # Colorful tree pattern
-gagp --matrix tree --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name
+gagp --matrix tree --from-date 2013-01-01 --to-date 2013-04-01 --repo your-github-username/your-repo-name
 
 # Or make it look super busy
-gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name
+gagp --mode busy --from-date 2013-01-01 --to-date 2013-04-01 --repo your-github-username/your-repo-name
 ```
 
 You can use your own custom matrix/tiles by using the `--matrix custom` and `--custom-matrix` options.
 
 ```bash
-gagp --matrix custom --custom-matrix path/to/your/custom_matrix.txt --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name
+gagp --matrix custom --custom-matrix path/to/your/custom_matrix.txt --from-date 2013-01-01 --to-date 2013-04-01 --repo your-github-username/your-repo-name
 ```
 
 when your `custom_matrix.txt` looks something like this:
@@ -127,7 +138,7 @@ You can generate your own custom matrix using any tile builder (see the [contrib
 (Optionally) You can force push the changes if the repository is not clean:
 
 ```bash
-gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name --force-push
+gagp --mode busy --from-date 2013-01-01 --to-date 2013-04-01 --repo your-github-username/your-repo-name --force-push
 ```
 
 *NOTE: Though I don't recommend it as the re-caching of the GitHub activity graph can take some time. I suggest using a new repo or deleting and recreating the existing one as this is kind of a "dummy" repository that we just need to update its history.*

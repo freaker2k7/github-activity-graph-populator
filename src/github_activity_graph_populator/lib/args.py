@@ -74,6 +74,14 @@ def get_args():
         help="Average number of commits per day [only used for 'busy' mode]",
     )
     parser.add_argument(
+        "--agent",
+        nargs="?",
+        const=".",
+        default=None,
+        metavar="PATH",
+        help="Install SKILLS.md into PATH when this argument is specified (default: current directory)",
+    )
+    parser.add_argument(
         "--cleanup",
         action="store_true",
         help="Run cleanup after populating GitHub activity graph",

@@ -123,6 +123,21 @@ def test_spread_actions_busy_with_mocked_run_force_push(
     main()
 
 
+def test_agent(monkeypatch):
+    path = Path("/tmp/gagp-test")
+
+    if path.exists():
+        for child in path.iterdir():
+            child.unlink()
+        path.rmdir()
+
+    monkeypatch.setattr("sys.argv", ["gagp", "--agent", str(path)])
+
+    main()
+
+    assert (path / "SKILL.md").exists()
+
+
 def test_main_runs_as_script(monkeypatch):
     monkeypatch.setattr("sys.argv", ["gagp", "--help"])
 

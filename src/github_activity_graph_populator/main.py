@@ -5,6 +5,7 @@ from os import linesep
 
 from github_activity_graph_populator.lib.args import get_args
 from github_activity_graph_populator.lib.consts import package_name
+from github_activity_graph_populator.lib.skill import set_skill
 from github_activity_graph_populator.lib.utils import cleanup, run
 from github_activity_graph_populator.modes.busy import spread_actions
 from github_activity_graph_populator.modes.matrix import calc_commits
@@ -17,6 +18,10 @@ logger = logging.getLogger(package_name)
 
 def main():
     args = get_args()
+
+    if args.agent:
+        set_skill(args.agent)
+        return
 
     blank_file = True
     input_folder_path = tempfile.mkdtemp(prefix="gagp-", dir=args.folder or "/tmp")
