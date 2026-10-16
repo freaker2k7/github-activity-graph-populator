@@ -79,7 +79,7 @@ def get_args():
         const=".",
         default=None,
         metavar="PATH",
-        help="Install SKILLS.md into PATH when this argument is specified (default: current directory)",
+        help="Install SKILL.md into PATH when this argument is specified (default: current directory)",
     )
     parser.add_argument(
         "--cleanup",

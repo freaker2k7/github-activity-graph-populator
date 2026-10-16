@@ -83,7 +83,7 @@ options:
                         white to dark green (default: None)
   --max-intensity MAX_INTENSITY
                         Average number of commits per day [only used for 'busy' mode] (default: 10)
-  --agent [PATH]        Install SKILLS.md into PATH when this argument is specified (default: current directory) (default: None)
+  --agent [PATH]        Install SKILL.md into PATH when this argument is specified (default: current directory) (default: None)
   --cleanup             Run cleanup after populating GitHub activity graph (default: False)
   --test                Run in test mode (default: False)
 ```
