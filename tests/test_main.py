@@ -133,5 +133,5 @@ def test_main_runs_as_script(monkeypatch):
         / "main.py"
     )
 
-    with pytest.raises(SystemExit) as exc:
+    with pytest.raises(SystemExit):
         runpy.run_path(str(script), run_name="__main__")
