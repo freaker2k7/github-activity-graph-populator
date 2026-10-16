@@ -66,6 +66,8 @@ Modes are added to the `src/github_activity_graph_populator/modes` directory as 
 
 ## Adding new tiles
 
+![Tile Builder](https://i.imgur.com/KnbWKsD.png)
+
 To add a new tile to the GitHub Activity Graph Populator, follow these steps:
 
 1. Open `tiles/builder.html` in your preferred browser.
@@ -90,10 +92,10 @@ When adding new things, make sure to write corresponding tests to ensure the fun
 You can run the tests using pytest:
 
 ```bash
-python -m pytest --cov=github_activity_graph_populator --cov-report=term-missing --cov-fail-under=99
+python -m pytest --cov=github_activity_graph_populator --cov-report=term-missing --cov-fail-under=100
 ```
 
-*NOTE: The coverage threshold is set to 99.53%, so the tests will fail if the coverage is below this value; if anyone can make it 100%, that would be great! Currently the only line that is not covered by the coverage, even though we test it in the last test in `test_main.py::test_main_runs_as_script`, is the last line in `main.py`.*
+*NOTE: The coverage threshold is set to 100%, so the tests will fail if the coverage is below this value.*
 
 ## Linting & Formatting
 

@@ -43,7 +43,7 @@ jobs:
           python -m pytest \
             --cov=github_activity_graph_populator \
             --cov-report=term-missing \
-            --cov-fail-under=99
+            --cov-fail-under=100
 
       - name: Build package
         run: python -m build

@@ -4,7 +4,7 @@
 
 GAGP (GitHub Activity Graph Populator) is a tool to populate your GitHub activity graph the way you like — or make it look super busy!
 
-**Zero** dependencies, **99.53%** test coverage and **PyPI MFA** enabled making it more secure and lightweight 🚀
+**Zero** dependencies, **100%** test coverage and **PyPI MFA** enabled making it more secure and lightweight 🚀
 
 ## Available Patterns
 
@@ -101,7 +101,7 @@ gagp --matrix tree --from 2013-01-01 --to 2013-04-01 --repo your-github-username
 gagp --mode busy --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name
 ```
 
-You can create your own custom matrix by using the `--matrix custom` and `--custom-matrix` options.
+You can use your own custom matrix/tiles by using the `--matrix custom` and `--custom-matrix` options.
 
 ```bash
 gagp --matrix custom --custom-matrix path/to/your/custom_matrix.txt --from 2013-01-01 --to 2013-04-01 --repo your-github-username/your-repo-name

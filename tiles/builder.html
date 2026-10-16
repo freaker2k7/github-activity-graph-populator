@@ -80,21 +80,24 @@
 		pre.shiki,
 		pre.astro-code,
 		code {
-			min-width: 320px;
-			max-width: 100%;
+			width: min(330px, 90%);
 			white-space: pre-wrap !important;
 			word-wrap: break-word !important;
 			overflow-x: auto;
 		}
 
 		@media screen and (max-width: 600px) {
-
 			#tile-code pre,
 			pre.shiki,
 			pre.astro-code,
 			code {
-				max-width: 280px;
+				width: min(320px, 90%);
 			}
+		}
+
+		.shiki-transformer-button-copy {
+			top: auto !important;
+			bottom: 11.5px !important;
 		}
 	</style>
 </head>
@@ -102,7 +105,6 @@
 <body>
 	<div id="root">
 		<form action="#" id="form">
-			<input type="text" id="tile-name" name="tile-name" required placeholder="Tile Name">
 			<div>
 				<button type="button" id="add-column">+ Add Column</button>
 				<button type="button" id="remove-column">– Del Column</button>
@@ -142,14 +144,8 @@
 		const code = document.getElementById('tile-code');
 
 		async function encode() {
-			const name = document.getElementById('tile-name').value;
-
-			code.innerHTML = await codeToHtml(`# ./src/github_activity_graph_populator/templates/${name || '<tile-name>'}.py
-matrix="""
-${grid.map(row => row.join("")).join("\n")}
-"""
-`, {
-				lang: 'py',
+			code.innerHTML = await codeToHtml(grid.map(row => row.join("")).join("\n"), {
+				lang: 'txt',
 				theme: 'everforest-light',
 				transformers: [transformerCopyButton({
 					duration: 1500,

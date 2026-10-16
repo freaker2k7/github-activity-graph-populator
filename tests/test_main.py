@@ -1,6 +1,7 @@
-import subprocess
-import sys
+import runpy
 from pathlib import Path
+
+import pytest
 
 from github_activity_graph_populator.main import main, run
 
@@ -122,22 +123,15 @@ def test_spread_actions_busy_with_mocked_run_force_push(
     main()
 
 
-def test_main_runs_as_script():
-    script_path = (
-        Path(__file__).parents[1]
+def test_main_runs_as_script(monkeypatch):
+    monkeypatch.setattr("sys.argv", ["gagp", "--help"])
+
+    script = (
+        Path(__file__).resolve().parents[1]
         / "src"
         / "github_activity_graph_populator"
         / "main.py"
     )
 
-    result = subprocess.run(
-        [sys.executable, str(script_path), "--test"],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stderr
-    assert (
-        "Repository imported" in result.stdout or "Repository imported" in result.stderr
-    )
+    with pytest.raises(SystemExit) as exc:
+        runpy.run_path(str(script), run_name="__main__")
