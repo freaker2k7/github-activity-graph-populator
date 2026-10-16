@@ -87,6 +87,7 @@
 		}
 
 		@media screen and (max-width: 600px) {
+
 			#tile-code pre,
 			pre.shiki,
 			pre.astro-code,
@@ -194,6 +195,7 @@
 			}
 			width = size * gridCols;
 			canvas.width = width;
+			canvas.style.width = Math.min(window.innerWidth * 0.9, width) + 'px';
 			await drawGrid();
 		});
 
@@ -205,6 +207,7 @@
 				}
 				width = size * gridCols;
 				canvas.width = width;
+				canvas.style.width = Math.min(window.innerWidth * 0.9, width) + 'px';
 				await drawGrid();
 			}
 		});

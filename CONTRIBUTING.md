@@ -66,7 +66,7 @@ Modes are added to the `src/github_activity_graph_populator/modes` directory as 
 
 ## Adding new tiles
 
-![Tile Builder](https://i.imgur.com/KnbWKsD.png)
+![Tile Builder](https://i.imgur.com/mZxhtVw.png)
 
 To add a new tile to the GitHub Activity Graph Populator, follow these steps:
 
