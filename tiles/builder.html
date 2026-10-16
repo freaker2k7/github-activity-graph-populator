@@ -187,11 +187,6 @@
 			await encode();
 		});
 
-		document.getElementById('tile-name').addEventListener('input', async (e) => {
-			e.preventDefault();
-			await encode();
-		});
-
 		document.getElementById('add-column').addEventListener('click', async () => {
 			gridCols++;
 			for (let row = 0; row < gridRows; row++) {
