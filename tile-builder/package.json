@@ -26,7 +26,7 @@
 		"vite-plugin-singlefile": "2.3.3"
 	},
 	"dependencies": {
-		"@selemondev/shiki-transformer-copy-button": "1.1.0",
-		"shiki": "4.5.0"
+		"@codemirror/lang-javascript": "6.2.5",
+		"codemirror": "6.0.2"
 	}
 }

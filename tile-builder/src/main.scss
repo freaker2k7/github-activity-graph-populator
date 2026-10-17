@@ -21,6 +21,10 @@ body {
 	background-position: center;
 }
 
+#root {
+	padding-bottom: 20px;
+}
+
 #form {
 	max-width: 90%;
 	display: flex;
@@ -52,6 +56,7 @@ body {
 		color: white;
 		display: block;
 		padding-top: 10px;
+		font-weight: bold;
 	}
 
 	div button {
@@ -78,39 +83,54 @@ small {
 	font-style: italic;
 }
 
-#tile-code {
+.code-block {
+	overflow: hidden;
+	border: 1px solid #d7d7d7;
+	border-radius: 12px;
+	background: #f5f5f5;
+	color: #050505;
+	width: 350px;
+	max-width: 90%;
+	margin: 0 auto;
+}
+
+.code-header {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+	border-bottom: 1px solid #d7d7d7;
+	font: 13px monospace;
 }
 
-#tile-code pre {
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
+.code-header button {
+	padding: 6px 10px;
+	border: 1px solid #444;
+	border-radius: 6px;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
 }
 
-pre.shiki,
-pre.astro-code,
-code {
-	width: min(330px, 90%);
-	white-space: pre-wrap !important;
-	word-wrap: break-word !important;
-	overflow-x: auto;
+#editor .cm-editor {
+	min-height: 180px;
+	background: #f5f5f5;
+	color: #050505;
 }
 
-@media screen and (max-width: 600px) {
-	#tile-code pre,
-	pre.shiki,
-	pre.astro-code,
-	code {
-		width: min(320px, 90%);
-	}
+#editor .cm-gutters {
+	background: #f5f5f5;
+	border-right: 1px solid #d7d7d7;
 }
 
-.shiki-transformer-button-copy {
-	top: auto !important;
-	bottom: 11.5px !important;
+#editor .cm-content {
+	padding: 12px 0;
+}
+
+#editor .cm-scroller {
+	overflow: auto;
+	font-family: monospace;
+	font-size: 14px;
 }
 
 #github-corner {
@@ -135,5 +155,11 @@ code {
 
 	img {
 		border-radius: 50%;
+	}
+}
+
+@media (max-width: 600px) {
+	#root {
+		padding-top: 50px;
 	}
 }

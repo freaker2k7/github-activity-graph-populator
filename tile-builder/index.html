@@ -14,7 +14,7 @@
 		<meta name="author" content="Evgeny Kolyakov" />
 		<meta name="theme-color" content="#000000" />
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<meta name="apple-mobile-web-app-title" content="%VITE_TITLE%" />
 		<link rel="apple-touch-icon" href="%VITE_ICON%" />
@@ -54,7 +54,14 @@
 				<small>Click on me</small>
 			</form>
 
-			<div id="tile-code"></div>
+			<div class="code-block">
+				<div class="code-header">
+					<span>example.js</span>
+					<button id="copy-btn">Copy</button>
+				</div>
+
+				<div id="editor"></div>
+			</div>
 		</div>
 
 		<script type="module" src="./src/main.ts"></script>

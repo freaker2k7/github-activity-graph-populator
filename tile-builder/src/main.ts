@@ -1,5 +1,4 @@
-import { transformerCopyButton } from '@selemondev/shiki-transformer-copy-button';
-import { codeToHtml } from 'shiki';
+import { EditorView, basicSetup } from 'codemirror';
 import './main.scss';
 
 const colors = ['#ffffff', '#00cc00', '#009900', '#006600', '#003300'];
@@ -22,21 +21,17 @@ canvas.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
 ctx.fillStyle = 'lightgray';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const grid = Array.from({ length: gridRows }, () => Array.from({ length: gridCols }, () => 0));
-const code = document.getElementById('tile-code')! as HTMLElement;
+let grid = Array.from({ length: gridRows }, () => Array.from({ length: gridCols }, () => 0));
+
+const editor = new EditorView({
+	doc: grid.map((row) => row.join('')).join('\n'),
+	extensions: [basicSetup],
+	parent: document.getElementById('editor')!,
+});
 
 async function encode() {
-	code.innerHTML = await codeToHtml(grid.map((row) => row.join('')).join('\n'), {
-		lang: 'txt',
-		theme: 'everforest-light',
-		transformers: [
-			transformerCopyButton({
-				duration: 1500,
-				display: 'ready',
-				successIcon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='rgba(128,128,128,1)' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24'%3E%3Crect width='8' height='4' x='8' y='2' rx='1' ry='1'/%3E%3Cpath d='M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2'/%3E%3Cpath d='m9 14 2 2 4-4'/%3E%3C/svg%3E`,
-				copyIcon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='rgba(128,128,128,1)' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24'%3E%3Crect width='8' height='4' x='8' y='2' rx='1' ry='1'/%3E%3Cpath d='M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2'/%3E%3C/svg%3E`,
-			}),
-		],
+	editor.dispatch({
+		changes: { from: 0, to: editor.state.doc.length, insert: grid.map((row) => row.join('')).join('\n') },
 	});
 }
 
@@ -51,7 +46,7 @@ canvas.addEventListener('click', (e) => {
 	drawGrid();
 });
 
-async function drawGrid() {
+async function drawGrid(encodeGrid = true) {
 	const cellWidth = canvas.width / gridCols;
 	const cellHeight = canvas.height / gridRows;
 	for (let row = 0; row < gridRows; row++) {
@@ -61,10 +56,23 @@ async function drawGrid() {
 		}
 	}
 
-	await encode();
+	if (encodeGrid) {
+		await encode();
+	}
 }
 
 drawGrid();
+
+(document.getElementById('copy-btn') as HTMLButtonElement).addEventListener('click', async (e) => {
+	e.preventDefault();
+	await navigator.clipboard.writeText(editor.state.doc.toString());
+
+	(e.target as HTMLButtonElement).textContent = 'Copied!';
+
+	setTimeout(() => {
+		(e.target as HTMLButtonElement).textContent = 'Copy';
+	}, 2000);
+});
 
 (document.getElementById('form') as HTMLFormElement).addEventListener('submit', async (e) => {
 	e.preventDefault();
@@ -98,6 +106,19 @@ drawGrid();
 		(document.getElementById('matrix-size') as HTMLDivElement).textContent = `${gridRows}x${gridCols}`;
 	}
 });
+
+setInterval(() => {
+	const new_code = editor.state.doc.toString();
+	const old_code = grid.map((row) => row.join('')).join('\n');
+
+	if (new_code !== old_code) {
+		const new_grid = new_code.split('\n').map((row) => row.split('').map((cell) => parseInt(cell)));
+		if (new_grid.length === gridRows && new_grid.every((row) => row.length === gridCols)) {
+			grid = new_grid;
+			drawGrid(false);
+		}
+	}
+}, 1000);
 
 window.addEventListener('resize', () => {
 	canvas.style.width = Math.min(window.innerWidth * 0.9, width) + 'px';
