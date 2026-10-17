@@ -1,0 +1,139 @@
+* {
+	box-sizing: border-box;
+	/* font-family: 'Courier New', Courier, monospace; */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	font-family: Arial, sans-serif;
+	padding: 20px 0;
+}
+
+body {
+	background-color: #000000;
+	background-image: url('https://i.imgur.com/8bGUbfn.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#form {
+	max-width: 90%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin: 0 auto;
+
+	input {
+		width: 350px;
+		max-width: 100%;
+		padding: 8px;
+		box-sizing: border-box;
+	}
+
+	div {
+		width: 350px;
+		max-width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		gap: 10px;
+	}
+
+	#matrix-size {
+		width: 100%;
+		box-sizing: border-box;
+		text-align: center;
+		color: white;
+		display: block;
+		padding-top: 10px;
+	}
+
+	div button {
+		width: 50%;
+		padding: 8px 12px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		background-color: #f9f9f9;
+		cursor: pointer;
+	}
+}
+
+#canvas {
+	margin: 20px 0 0 0;
+	cursor: pointer;
+	max-width: 100%;
+}
+
+small {
+	display: block;
+	margin-bottom: 20px;
+	color: #666;
+	font-size: 12px;
+	font-style: italic;
+}
+
+#tile-code {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#tile-code pre {
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+pre.shiki,
+pre.astro-code,
+code {
+	width: min(330px, 90%);
+	white-space: pre-wrap !important;
+	word-wrap: break-word !important;
+	overflow-x: auto;
+}
+
+@media screen and (max-width: 600px) {
+	#tile-code pre,
+	pre.shiki,
+	pre.astro-code,
+	code {
+		width: min(320px, 90%);
+	}
+}
+
+.shiki-transformer-button-copy {
+	top: auto !important;
+	bottom: 11.5px !important;
+}
+
+#github-corner {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 70px;
+	height: 70px;
+	background-color: #d7d7d7;
+	border-radius: 0 0 0 30px;
+	transition: all 0.3s ease-in-out;
+
+	&:hover {
+		width: 80px;
+		height: 80px;
+		background-color: #575757;
+	}
+
+	img {
+		border-radius: 50%;
+	}
+}

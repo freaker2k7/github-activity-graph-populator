@@ -37,8 +37,10 @@ You can see a live demo on my own GitHub profile [here](https://github.com/freak
 
 *Another Note: On the way, I discovered I can write history before I was a user which opened the 2012 tab and I cound see the year.*
 
+Also, the [tile builder](https://freaker2k7.github.io/github-activity-graph-populator/) allows you to create custom tiles for the matrix mode. The tiles can be as long as you wish.
 
-## TL;DR
+
+## Intro
 
 Originally, I wanted to represent my Bitbucket activity (where I have over 250 private repositories vs ~50 public ones on GitHub plus a few dozens private ones that apparenly isn't shown on the activity graph for the public) onto my GitHub activity graph, but I didn't want to mess with syncying jobs and dealing with API's when it's just git...
 So I decided to just draw a nice pattern on my GitHub activity graph instead, using a nifty git hack I learned over the years; either way, the volume of my commits across GH, BB, AWS and a few other platforms is so high that it doesn't really matter 😜
@@ -133,7 +135,7 @@ when your `custom_matrix.txt` looks something like this:
 There must be 7 rows and at least 1 column in the matrix and it should be a plain text file.
 The values in the matrix represent the color 0-4 from white to dark green.
 
-You can generate your own custom matrix using any tile builder (see the [contribution guide](https://github.com/freaker2k7/github-activity-graph-populator?tab=contributing-ov-file) for more information).
+You can generate your own custom matrix using our [tile builder](https://freaker2k7.github.io/github-activity-graph-populator/).
 
 (Optionally) You can force push the changes if the repository is not clean:
 

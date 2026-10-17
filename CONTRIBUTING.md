@@ -66,13 +66,23 @@ Modes are added to the `src/github_activity_graph_populator/modes` directory as 
 
 ## Adding new tiles
 
-![Tile Builder](https://i.imgur.com/mZxhtVw.png)
+![Tile Builder](https://i.imgur.com/JmJyeol.jpeg)
 
-To add a new tile to the GitHub Activity Graph Populator, follow these steps:
+Go to the [Tile Builder page](https://freaker2k7.github.io/github-activity-graph-populator/) in your browser to start designing new tiles.
 
-1. Open `tiles/builder.html` in your preferred browser.
+Or, if you prefer, you can open the `tile-builder/` folder and run it locally, optionally you can also improve the builder.
+To run the Tile Builder locally:
+
+1. In the `tile-builder` folder, run:
+
+```bash
+npm i
+npm run dev
+```
+
 2. Use the builder interface to design your new tile.
-3. Copy the generated code for your new tile, the path of the new tile is the first line of the generated code.
+3. Copy the generated code for your new tile under `src/github_activity_graph_populator/templates/<new-matrix-name>.py`.
+Please look at other existing tiles in the `src/github_activity_graph_populator/templates/` directory for reference.
 
 ## Dry Run
 

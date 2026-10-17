@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+	<head>
+		<title>%VITE_TITLE%</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="robots" content="index, follow, cache" />
+		<meta name="format-detection" content="telephone=no" />
+
+		<meta name="description" content="%VITE_SUBTITLE%" />
+		<meta name="keywords" content="JavaScript, Tone.js, bass tabs, prime numbers, music generation" />
+		<meta name="author" content="Evgeny Kolyakov" />
+		<meta name="theme-color" content="#000000" />
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="%VITE_TITLE%" />
+		<link rel="apple-touch-icon" href="%VITE_ICON%" />
+
+		<meta property="og:title" content="%VITE_TITLE%" />
+		<meta property="og:description" content="%VITE_SUBTITLE%" />
+		<meta property="og:image" content="https://i.imgur.com/pdYSl4J.png" />
+		<meta property="og:url" content="https://freaker2k7.github.io/github-activity-graph-populator/" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="%VITE_TITLE%" />
+		<meta name="twitter:description" content="%VITE_SUBTITLE%" />
+		<meta name="twitter:image" content="https://i.imgur.com/pdYSl4J.png" />
+
+		<link rel="icon" href="%VITE_ICON%" />
+
+		<link rel="canonical" href="https://freaker2k7.github.io/github-activity-graph-populator/" />
+
+		<link
+			rel="manifest"
+			href='data:application/manifest+json,{"short_name":"%VITE_TITLE%","name":"%VITE_SUBTITLE%","icons":[{"src":"%VITE_ICON%","type":"image/png","sizes":"%VITE_ICON_SIZE%x%VITE_ICON_SIZE%"}],"display":"standalone","theme_color":"black","background_color":"white"}'
+		/>
+	</head>
+
+	<body>
+		<a href="https://github.com/freaker2k7/github-activity-graph-populator" id="github-corner" target="_blank">
+			<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="40" />
+		</a>
+		<div id="root">
+			<form action="#" id="form">
+				<div>
+					<button type="button" id="add-column">+ Add Column</button>
+					<button type="button" id="remove-column">– Del Column</button>
+				</div>
+				<div id="matrix-size">7x7</div>
+				<canvas id="canvas"></canvas>
+				<small>Click on me</small>
+			</form>
+
+			<div id="tile-code"></div>
+		</div>
+
+		<script type="module" src="./src/main.ts"></script>
+	</body>
+</html>
