@@ -51,6 +51,10 @@ jobs:
         run: npm run format:check
         working-directory: tile-builder
 
+      - name: Prepare .env
+        run: cp .env.example .env
+        working-directory: tile-builder
+
       - name: Build
         run: npm run build
         working-directory: tile-builder
